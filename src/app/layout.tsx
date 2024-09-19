@@ -7,17 +7,6 @@ const APP_NAME = "FMK App";
 const APP_DEFAULT_TITLE = "FMK App";
 const APP_TITLE_TEMPLATE = "%s - FMK App";
 const APP_DESCRIPTION = "한국의 100대 명산";
-
-// Viewport 설정을 별도로 분리합니다.
-export const viewport: { initialScale: number; shrinkToFit: string; themeColor: string; minimumScale: number; width: string; viewportFit: string } = {
-  minimumScale: 1,
-  initialScale: 1,
-  width: "device-width",
-  shrinkToFit: "no",
-  viewportFit: "cover",
-  themeColor: "#FFFFFF",
-};
-
 // Metadata 설정
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -65,6 +54,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <title>한국의 100대 명산</title>
+      </head>
       <body className="flex flex-col min-h-screen">
         <Header />
         <main className="flex-grow">{children}</main>

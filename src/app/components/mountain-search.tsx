@@ -49,7 +49,8 @@ export default function SearchMountain({ onSearch }: SearchMountainProps) {
 
       {/* 검색 입력 필드 */}
       <input
-        className=" text-green-800 h-12 w-full rounded-md border border-gray-300 bg-gray-100 px-4 py-2 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500"
+        className="text-green-800 h-12 w-full rounded-md border border-gray-300 bg-gray-100 px-4 py-2 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500"
+        style={{ fontSize: '16px' }}
         placeholder={searchBy === 'name' ? '명산 이름으로 검색...' : '시도명으로 검색...'}
         type="search"
         value={searchTerm}
