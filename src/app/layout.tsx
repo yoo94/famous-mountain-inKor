@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import './globals.css';
 
-import Header from "@/app/components/header";
-import Footer from "@/app/components/footer";
+import Header from "@/app/(layout)/components/header";
+import Footer from "@/app/(layout)/components/footer";
 const APP_NAME = "FMK App";
 const APP_DEFAULT_TITLE = "FMK App";
 const APP_TITLE_TEMPLATE = "%s - FMK App";

@@ -1,4 +1,17 @@
-/* src/app/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --primary-color: #4caf50;
+  /* Green color */
+  --primary-dark-color: #388e3c;
+  --text-color: #ffffff;
+  /* White text */
+}
+
+body {
+  background-color: #f0f0f0;
+  /* Light gray background */
+  color: var(--text-color);
+}
