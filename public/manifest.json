@@ -2,9 +2,8 @@
   "name": "FMK",
   "short_name": "FMK",
   "description": "FMK에서 한국 100대 명산 정보를 얻으세요",
-  "theme_color": "#ffc211",
   "background_color": "#ffffff",
-  "display": "standalone",
+  "display": "fullscreen",
   "scope": "/",
   "start_url": "/",
   "icons": [
