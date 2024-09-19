@@ -22,7 +22,7 @@ export default function SearchMountain({ onSearch }: SearchMountainProps) {
   };
 
   return (
-    <div className="relative mx-auto w-full max-w-lg p-4 bg-white shadow-md rounded-lg">
+    <div className="relative mx-auto w-full p-4 bg-white shadow-md rounded-lg">
       <h2 className="text-lg font-semibold text-green-800 mb-4">검색 기준 선택</h2>
       <RadioGroup className="mb-4 space-y-2">
         <div className="flex items-center space-x-3">
