@@ -19,7 +19,7 @@ export default function Pagination() {
   };
 
   return (
-    <PaginationContent className="flex items-center justify-center mr-auto">
+    <PaginationContent className="flex items-center justify-center m-auto">
       <PaginationItem>
         <PaginationPrevious
           href="#"
