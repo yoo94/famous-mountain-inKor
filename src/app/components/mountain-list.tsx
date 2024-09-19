@@ -7,8 +7,7 @@ async function fetchMountainList(
   srchFrtrlNm = '',
   srchCtpvNm = ''
 ): Promise<MountainData[]> {
-  const serviceKey =
-    'pYpBESj9KAnG2Pz1YSPDBZdaZ1hX/GBZuhOb2to/Y0EspudSkT4dDZbtH0YgB9fy/j82zaICpPy9efyNwYOC9w==';
+  const serviceKey = process.env.NEXT_PUBLIC_API_KEY;
   const url = `http://apis.data.go.kr/B553662/top100FamtListBasiInfoService/getTop100FamtListBasiInfoList?serviceKey=${serviceKey}&pageNo=${pageNo}&numOfRows=${numOfRows}&type=json&srchFrtrlNm=${srchFrtrlNm}&srchCtpvNm=${srchCtpvNm}`;
 
   const response = await fetch(url);
