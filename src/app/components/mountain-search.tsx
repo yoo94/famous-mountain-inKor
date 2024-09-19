@@ -1,24 +1,19 @@
+// components/SearchMountain.tsx
 'use client';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import React, { useState } from 'react';
+import { useSearchStore } from '@/stores/use-search-condition-store';
+import React from 'react';
 
-type SearchMountainProps = {
-  onSearch: (searchTerm: string, searchBy: 'name' | 'city') => void;
-};
-
-export default function SearchMountain({ onSearch }: SearchMountainProps) {
-  const [searchBy, setSearchBy] = useState<'name' | 'city'>('name');
-  const [searchTerm, setSearchTerm] = useState('');
+export default function SearchMountain() {
+  const { searchTerm, searchBy, setSearchTerm, setSearchBy } = useSearchStore();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
-    onSearch(e.target.value, searchBy);  // 검색어와 선택된 옵션을 전달
   };
 
   const handleOptionChange = (value: 'name' | 'city') => {
     setSearchBy(value);
-    onSearch(searchTerm, value);  // 검색 기준 업데이트
   };
 
   return (
@@ -47,7 +42,6 @@ export default function SearchMountain({ onSearch }: SearchMountainProps) {
         </div>
       </RadioGroup>
 
-      {/* 검색 입력 필드 */}
       <input
         className="text-green-800 h-12 w-full rounded-md border border-gray-300 bg-gray-100 px-4 py-2 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500"
         style={{ fontSize: '16px' }}

@@ -9,3 +9,7 @@ export type MountainData = {
   aslAltide: number;
   crtrDt: string;
 };
+
+export type SearchMountainProps = {
+  onSearch: (searchTerm: string, searchBy: 'name' | 'city') => void;
+};

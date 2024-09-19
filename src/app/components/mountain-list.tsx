@@ -1,14 +1,16 @@
+'use client';
 import { MountainData } from '../types/mountain-type';
 import React, { useEffect, useState } from 'react';
+import { useSearchStore } from '@/stores/use-search-condition-store';
 
 async function fetchMountainList(
-  pageNo = 1,
+  searchPage: number,
   numOfRows = 10,
-  srchFrtrlNm = '',
-  srchCtpvNm = ''
+  srchFrtrlNm: string,
+  srchCtpvNm: string
 ): Promise<MountainData[]> {
   const serviceKey = process.env.NEXT_PUBLIC_API_KEY;
-  const url = `https://apis.data.go.kr/B553662/top100FamtListBasiInfoService/getTop100FamtListBasiInfoList?serviceKey=${serviceKey}&pageNo=${pageNo}&numOfRows=${numOfRows}&type=json&srchFrtrlNm=${srchFrtrlNm}&srchCtpvNm=${srchCtpvNm}`;
+  const url = `https://apis.data.go.kr/B553662/top100FamtListBasiInfoService/getTop100FamtListBasiInfoList?serviceKey=${serviceKey}&pageNo=${searchPage}&numOfRows=${numOfRows}&type=json&srchFrtrlNm=${srchFrtrlNm}&srchCtpvNm=${srchCtpvNm}`;
 
   const response = await fetch(url);
   if (!response.ok) {
@@ -19,12 +21,8 @@ async function fetchMountainList(
   return data.response.body.items.item as MountainData[];
 }
 
-type MountainListProps = {
-  searchTerm: string;
-  searchBy: 'name' | 'city';
-};
-
-export default function MountainList({ searchTerm, searchBy }: MountainListProps) {
+export default function MountainList() {
+  const { searchTerm, searchBy, searchPage } = useSearchStore();
   const [mountains, setMountains] = useState<MountainData[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -32,9 +30,8 @@ export default function MountainList({ searchTerm, searchBy }: MountainListProps
     async function getMountains() {
       setLoading(true);
       try {
-        // 'searchBy'에 따라 적절한 검색 파라미터 사용
         const data = await fetchMountainList(
-          1,
+          searchPage,
           10,
           searchBy === 'name' ? searchTerm : '',
           searchBy === 'city' ? searchTerm : ''
@@ -47,7 +44,7 @@ export default function MountainList({ searchTerm, searchBy }: MountainListProps
       }
     }
     getMountains();
-  }, [searchTerm, searchBy]); // 'searchTerm' 또는 'searchBy'가 변경될 때마다 호출
+  }, [searchTerm, searchBy, searchPage]);
 
   if (loading) {
     return <div>Loading...</div>;
