@@ -67,8 +67,8 @@ export default function MountainList() {
             <p className="text-gray-700">
               <span className="font-semibold">고도:</span> {mountain.aslAltide}m
             </p>
-            <Button className='text-blue-500 hover:underline w-full border-solid border-blue-950 rounded-lg'>
-              <Link href={`/details/${mountain.frtrlNm}`}>
+            <Button className="bg-green-300 text-green-950 font-semibold py-2 px-4 rounded-lg hover:bg-green-100 transition-colors duration-200 ease-in-out w-full mt-4">
+              <Link href={`/details/${mountain.frtrlNm}`} className="block w-full text-center">
                 상세보기
               </Link>
             </Button>
