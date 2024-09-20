@@ -6,14 +6,16 @@ import { useSearchStore } from '@/stores/use-search-condition-store';
 import React from 'react';
 
 export default function SearchMountain() {
-  const { searchTerm, searchBy, setSearchTerm, setSearchBy } = useSearchStore();
+  const { searchTerm, searchBy, setSearchTerm, setSearchBy, setSearchPage } = useSearchStore();  // setSearchPage 추가
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
+    setSearchPage(1);  // 검색 시 페이지를 1로 변경
   };
 
   const handleOptionChange = (value: 'name' | 'city') => {
     setSearchBy(value);
+    setSearchPage(1);  // 검색 기준 변경 시 페이지를 1로 변경
   };
 
   return (

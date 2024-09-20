@@ -17,7 +17,6 @@ export default function Pagination() {
   const handlePageChange = (page: number) => {
     setSearchPage(page);
   };
-
   return (
     <PaginationContent className="flex items-center justify-center m-auto">
       <PaginationItem>
