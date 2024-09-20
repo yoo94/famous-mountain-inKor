@@ -2,6 +2,8 @@
 import { MountainData } from '../types/mountain-type';
 import React, { useEffect, useState } from 'react';
 import { useSearchStore } from '@/stores/use-search-condition-store';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 async function fetchMountainList(
   searchPage: number,
@@ -65,13 +67,19 @@ export default function MountainList() {
             <p className="text-gray-700">
               <span className="font-semibold">고도:</span> {mountain.aslAltide}m
             </p>
-          </div>
+            <Button className='text-blue-500 hover:underline w-full border-solid border-blue-950 rounded-lg'>
+              <Link href={`/details/${mountain.frtrlNm}`}>
+                상세보기
+              </Link>
+            </Button>
+          </div >
         ))
       ) : (
         <div className="text-center text-gray-500 col-span-3">
           검색 결과가 없습니다.
         </div>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 }
