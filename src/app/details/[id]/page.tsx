@@ -1,5 +1,6 @@
 import { parseStringPromise } from 'xml2js';
 import Image from 'next/image';
+
 interface MountainDetailPageProps {
   params: { id: string };
 }
@@ -37,6 +38,8 @@ interface XMLResponse {
     ];
   };
 }
+
+// HTML 엔티티 및 태그 변환 함수
 function decodeHTMLEntities(text: string): string {
   const entities: Record<string, string> = {
     '&lt;': '<',
@@ -47,9 +50,13 @@ function decodeHTMLEntities(text: string): string {
     '&nbsp;': ' ',
   };
 
-  // Use regex to match and replace known HTML entities
-  return text.replace(/&[a-z]+;/g, (match) => entities[match] || match);
+  // HTML 엔티티 변환 및 태그 대체
+  return text
+    .replace(/&[a-z]+;/g, (match) => entities[match] || match) // 엔티티 변환
+    .replace(/<br\s*\/?>/gi, '\n') // <br> 및 <BR> 태그를 줄바꿈으로 변환
+    .replace(/<\/?p>/gi, '\n\n'); // <p> 및 </p> 태그를 단락으로 변환
 }
+
 async function fetchMountainDetailData(frtrlNm: string): Promise<MountainDetail[]> {
   const serviceKey = process.env.NEXT_PUBLIC_API_KEY;
   const url = `http://openapi.forest.go.kr/openapi/service/trailInfoService/getforeststoryservice?serviceKey=${serviceKey}&mntnNm=${frtrlNm}`;
@@ -108,25 +115,25 @@ const MountainDetailsPage = async ({ params }: MountainDetailPageProps) => {
           {/* 산 설명 섹션 */}
           <div className="border-t border-gray-300 mt-4 pt-4">
             <h2 className="text-lg font-semibold mb-2">산 설명</h2>
-            <p className="text-gray-700 whitespace-pre-line">{detail.description?.replace(/<BR>/g, '\n')}</p>
+            <p className="text-gray-700 whitespace-pre-line">{detail.description}</p>
           </div>
 
           {/* 숙식 정보 섹션 */}
           <div className="border-t border-gray-300 mt-4 pt-4">
             <h2 className="text-lg font-semibold mb-2">숙식 정보</h2>
-            <p className="text-gray-700 whitespace-pre-line">{detail.lodgingInfo?.replace(/<BR>/g, '\n')}</p>
+            <p className="text-gray-700 whitespace-pre-line">{detail.lodgingInfo}</p>
           </div>
 
           {/* 추천 코스 섹션 */}
           <div className="border-t border-gray-300 mt-4 pt-4">
             <h2 className="text-lg font-semibold mb-2">추천 코스</h2>
-            <p className="text-gray-700 whitespace-pre-line">{detail.courseInfo?.replace(/<BR>/g, '\n')}</p>
+            <p className="text-gray-700 whitespace-pre-line">{detail.courseInfo}</p>
           </div>
 
           {/* 교통 정보 섹션 */}
           <div className="border-t border-gray-300 mt-4 pt-4">
             <h2 className="text-lg font-semibold mb-2">교통 정보</h2>
-            <p className="text-gray-700 whitespace-pre-line">{detail.transportationInfo?.replace(/<BR>/g, '\n')}</p>
+            <p className="text-gray-700 whitespace-pre-line">{detail.transportationInfo}</p>
           </div>
         </div>
       ))}
