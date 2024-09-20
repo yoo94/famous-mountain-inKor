@@ -5,5 +5,7 @@ const withPWA = withPWAInit({
 });
 
 export default withPWA({
-
+    images: {
+        domains: ['www.forest.go.kr'],
+    },
 });

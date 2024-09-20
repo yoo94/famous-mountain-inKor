@@ -99,7 +99,7 @@ const MountainDetailsPage = async ({ params }: MountainDetailPageProps) => {
         <div key={index} className="bg-white shadow-md rounded-lg p-6 mb-8 border border-gray-300 text-green-950">
           {detail.image && (
             <div className="w-full h-64 overflow-hidden rounded-t-lg mb-4">
-              <Image src={detail.image} alt={`${detail.name} 이미지`} className="object-cover w-full h-full" />
+              <Image src={detail.image} alt={`${detail.name} 이미지`} width={100} height={300} className="object-cover w-full h-full" />
             </div>
           )}
           <h1 className="text-3xl font-bold mb-4 text-center">{detail.name}</h1>
