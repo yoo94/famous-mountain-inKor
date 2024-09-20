@@ -37,9 +37,8 @@ interface XMLResponse {
     ];
   };
 }
-// HTML 엔티티 변환 함수
 function decodeHTMLEntities(text: string): string {
-  const entities = {
+  const entities: Record<string, string> = {
     '&lt;': '<',
     '&gt;': '>',
     '&amp;': '&',
@@ -47,6 +46,8 @@ function decodeHTMLEntities(text: string): string {
     '&#39;': "'",
     '&nbsp;': ' ',
   };
+
+  // Use regex to match and replace known HTML entities
   return text.replace(/&[a-z]+;/g, (match) => entities[match] || match);
 }
 async function fetchMountainDetailData(frtrlNm: string): Promise<MountainDetail[]> {
