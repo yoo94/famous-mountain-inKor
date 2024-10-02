@@ -22,7 +22,8 @@ export default function Page() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6 text-green-950">한국의 100대 명산 {userInfo}</h1>
+      <h1 className="text-3xl font-bold mb-6 text-green-950">한국의 100대 명산</h1>
+      <h5 className="text-green-950">환영합니다. {userInfo} 님 </h5>
       <SearchMountain />
       <MountainList />
       <Pagination />
