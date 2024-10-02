@@ -1,8 +1,11 @@
-// schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
 
 datasource db {
-  provider = "postgresql" // 사용할 데이터베이스의 종류
-  url      = env("DATABASE_URL") // 환경 변수에서 데이터베이스 URL을 가져옵니다.
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {
@@ -11,24 +14,25 @@ model User {
   email          String    @unique
   image          String?
   emailVerified  DateTime?
-  userid         String?   // Google ID 추가
+  password       String?   // 비밀번호 추가
   accounts       Account[]
   sessions       Session[]
 }
 
-
 model Account {
   id                 Int      @id @default(autoincrement())
-  userId             Int      // userId 필드는 Int로 설정
-  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userEmail          String
+  user               User     @relation(fields: [userEmail], references: [email])
   provider           String
   providerAccountId  String
+
+  @@unique([userEmail, providerAccountId]) // 이 조합을 고유하게 설정
 }
 
 model Session {
   id            Int     @id @default(autoincrement())
-  userId        Int     // userId 필드는 Int로 설정
-  user          User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userEmail     String   // 이메일 필드 추가
+  user          User    @relation(fields: [userEmail], references: [email])
   sessionToken  String  @unique
   expires       DateTime
 }
