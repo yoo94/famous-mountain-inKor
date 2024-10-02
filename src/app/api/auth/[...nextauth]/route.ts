@@ -1,4 +1,5 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
+import GoogleProvider from 'next-auth/providers/google'; // Google Provider 추가
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { prisma } from '@/lib/prismaClient';
 import bcrypt from 'bcrypt';
@@ -12,6 +13,7 @@ interface CustomJWT extends JWT {
 
 const authOptions: NextAuthOptions = {
   providers: [
+    // 기존 CredentialsProvider 설정
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
@@ -40,6 +42,12 @@ const authOptions: NextAuthOptions = {
         return { id: user.id.toString(), email: user.email, name: user.name };
       },
     }),
+
+    // 새로 추가된 GoogleProvider 설정
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID || '',
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+    }),
   ],
   pages: {
     signIn: '/auth/login',
@@ -67,8 +75,7 @@ const authOptions: NextAuthOptions = {
       return session;
     },
     async redirect({ baseUrl }) {
-      // 로그인 후 루트로 이동하도록 리다이렉트 설정
-      return baseUrl; // baseUrl이 루트 경로를 나타냄 (예: 'http://localhost:3000/')
+      return baseUrl;
     },
   },
   debug: process.env.NODE_ENV === 'development',
