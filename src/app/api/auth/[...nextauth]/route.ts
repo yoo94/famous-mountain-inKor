@@ -54,8 +54,29 @@ const authOptions: NextAuthOptions = {
     error: '/auth/error',
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
       const customToken = token as CustomJWT;
+
+
+      if (user && account?.provider === 'google') {
+        const email = user.email ?? undefined;
+        if (email) {
+          const existingUser = await prisma.user.findUnique({
+            where: { email },
+          });
+
+          if (!existingUser) {
+            await prisma.user.create({
+              data: {
+                email,
+                name: user.name ?? '',
+                password: null,
+              },
+            });
+          }
+        }
+      }
+
 
       if (user) {
         customToken.id = user.id.toString();
