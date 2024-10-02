@@ -7,8 +7,6 @@ declare module 'next-auth' {
       id: string; // 사용자 ID 추가
       name?: string | null;
       email?: string | null;
-      image?: string | null;
-      userid?: string; // Google ID 추가
     };
   }
 
@@ -22,6 +20,5 @@ declare module 'next-auth' {
     name?: string | null;
     email?: string | null;
     image?: string | null;
-    userid?: string; // Google ID 추가
   }
 }

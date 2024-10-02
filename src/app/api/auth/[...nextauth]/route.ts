@@ -37,7 +37,7 @@ const authOptions: NextAuthOptions = {
           throw new Error('Invalid password');
         }
 
-        return { id: user.id.toString(), email: user.email };
+        return { id: user.id.toString(), email: user.email, name: user.name };
       },
     }),
   ],
@@ -52,6 +52,7 @@ const authOptions: NextAuthOptions = {
       if (user) {
         customToken.id = user.id.toString();
         customToken.email = user.email;
+        customToken.name = user.name;
       }
       return customToken;
     },
@@ -61,6 +62,7 @@ const authOptions: NextAuthOptions = {
       if (customToken) {
         session.user.id = customToken.id || '';
         session.user.email = customToken.email || '';
+        session.user.name = customToken.name || '';
       }
       return session;
     },

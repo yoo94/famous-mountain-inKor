@@ -1,12 +1,15 @@
+// src/app/(layout)/components/session-wrapper.tsx
 'use client';
 
-import { SessionProvider } from 'next-auth/react';
-import type { ReactNode } from 'react';
+import { SessionProvider } from "next-auth/react";
+import { ReactNode } from "react";
 
-interface Props {
+interface SessionWrapperProps {
   children: ReactNode;
 }
 
-export default function SessionWrapper({ children }: Props) {
+const SessionWrapper = ({ children }: SessionWrapperProps) => {
   return <SessionProvider>{children}</SessionProvider>;
-}
+};
+
+export default SessionWrapper;

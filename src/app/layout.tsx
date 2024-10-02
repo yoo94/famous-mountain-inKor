@@ -10,7 +10,6 @@ const APP_DEFAULT_TITLE = 'FMK App';
 const APP_TITLE_TEMPLATE = '%s - FMK App';
 const APP_DESCRIPTION = '한국의 100대 명산';
 
-// Metadata 설정
 export const metadata: Metadata = {
   applicationName: APP_NAME,
   icons: [{ rel: 'icon', url: '/assets/logo-192x192.png', sizes: '192x192' }],
@@ -46,8 +45,8 @@ export const metadata: Metadata = {
     description: APP_DESCRIPTION,
   },
 };
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+
   return (
     <html lang="en">
       <head>
@@ -58,9 +57,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <title>한국의 100대 명산</title>
       </head>
       <body className="flex flex-col min-h-screen">
-        <Header />
-        {/* SessionWrapper로 감싸기 */}
         <SessionWrapper>
+          <Header />
           <main className="flex-grow">{children}</main>
         </SessionWrapper>
         <Footer />

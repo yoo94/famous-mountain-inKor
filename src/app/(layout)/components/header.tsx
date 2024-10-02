@@ -1,5 +1,8 @@
+// components/header.tsx
 'use client';
+
 import React, { useState } from 'react';
+import { useSession, signOut } from 'next-auth/react';
 import { SquareChevronDown, SquareChevronUp } from 'lucide-react';
 import Link from 'next/link';
 
@@ -10,6 +13,7 @@ const menu = [
 ];
 
 export default function Header() {
+    const { data: session } = useSession(); // 세션 정보 가져오기
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -37,6 +41,16 @@ export default function Header() {
                                 </Link>
                             </li>
                         ))}
+                        {session && (
+                            <li>
+                                <button
+                                    onClick={() => signOut({ callbackUrl: '/' })}
+                                    className="text-lg font-medium hover:underline hover:text-red-300 transition-colors duration-200"
+                                >
+                                    로그아웃
+                                </button>
+                            </li>
+                        )}
                     </ul>
                 </nav>
             )}
