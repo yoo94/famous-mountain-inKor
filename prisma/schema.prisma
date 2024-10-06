@@ -17,6 +17,7 @@ model User {
   password       String?   // 비밀번호 추가
   accounts       Account[]
   sessions       Session[]
+  messages       Message[]  // User와의 관계 추가
 }
 
 model Account {
@@ -35,4 +36,13 @@ model Session {
   user          User    @relation(fields: [userEmail], references: [email])
   sessionToken  String  @unique
   expires       DateTime
+}
+
+model Message {
+  id         Int      @id @default(autoincrement()) // 메시지 고유 ID
+  room       String   // 메시지가 속한 채팅방 ID
+  text       String   // 메시지 내용
+  createdAt  DateTime @default(now()) // 메시지 생성 시간
+  userEmail  String   // 메시지 작성자 이메일
+  user       User     @relation(fields: [userEmail], references: [email]) // 사용자와의 관계
 }

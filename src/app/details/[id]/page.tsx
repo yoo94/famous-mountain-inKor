@@ -1,5 +1,6 @@
 import { parseStringPromise } from 'xml2js';
 import Image from 'next/image';
+import RealTimeChatButton from '@/app/details/components/RealTimeChatButton';
 
 interface MountainDetailPageProps {
   params: { id: string };
@@ -97,9 +98,10 @@ async function fetchMountainDetailData(frtrlNm: string): Promise<MountainDetail[
 }
 
 const MountainDetailsPage = async ({ params }: MountainDetailPageProps) => {
+  
   const frtrlNm = params.id;
   const detailData: MountainDetail[] = await fetchMountainDetailData(frtrlNm);
-
+  
   return (
     <div className="container mx-auto p-4">
       {detailData.map((detail, index) => (
@@ -111,6 +113,7 @@ const MountainDetailsPage = async ({ params }: MountainDetailPageProps) => {
           )}
           <h1 className="text-3xl font-bold mb-4 text-center">{detail.name}</h1>
           <p className="text-gray-600 mb-6 text-center">높이: {detail.height}m</p>
+          <RealTimeChatButton frtrlNm={frtrlNm} name={detail.name} />
 
           {/* 산 설명 섹션 */}
           <div className="border-t border-gray-300 mt-4 pt-4">
